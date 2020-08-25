@@ -25,5 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('theme.urls')),
     path('v_area/',  voulunteer_work.views.v_area, name='v_area'),
+    path('v_all/',  voulunteer_work.views.v_all, name='v_all'),
     path('mypage/',  mypage.views.mypage, name='mypage'),
+    path('items/', items.views.items, name='items'),
 ]
