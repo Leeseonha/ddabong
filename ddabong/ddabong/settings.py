@@ -82,12 +82,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ddabong_db',
-        'USER' : 'jesh',
-        'PASSWORD':'2728',
+        'USER' : 'root',
+        'PASSWORD':'201814027',
         'HOST': 'localhost',
         'PORT' : '3306',
         'OPTIONS' : {
-            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
+            'read_default_file' : 'ddabong/my.cnf',
         }
 }
 
