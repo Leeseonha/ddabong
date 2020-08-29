@@ -44,10 +44,16 @@ INSTALLED_APPS = [
     'mypage',
     'voulunteer_work',
 
+    # django-rest-auth
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
     #allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'rest_auth.registration',
 
     'allauth.socialaccount.providers.kakao',
 ]
@@ -151,6 +157,17 @@ STATICFILES_DIRS = (
 )
 
 SITE_ID = 5
+
+# rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ],
+}
 
 STATIC_URL = '/static/'
 

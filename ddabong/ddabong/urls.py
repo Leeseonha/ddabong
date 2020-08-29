@@ -20,6 +20,7 @@ import items.views
 import mypage.views
 import theme.views
 import voulunteer_work.views
+import account.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
