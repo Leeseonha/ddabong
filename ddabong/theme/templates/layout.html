@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,9 +68,10 @@
           <!-- <nav id="nav-menu-container"> -->
           <ul class="nav-menu">
             <li class="nav-item dropdown" style="margin-left: 10%">
+              {% if user.is_authenticated %}
               <img src="" class="rounded-circle" width="40px" height="40px" />
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">님이 로그인 중</a>
+                aria-expanded="false">{{user.username}} 님이 로그인 중</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'mypage' %}">
                   <p>내봉사내역</p>
@@ -80,13 +81,13 @@
                   <p>내포인트내역</p>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/accounts/logout">
                   <p>로그아웃</p>
                 </a>
               </div>
-              <!-- <li class="contact" style="margin-left: 20%"><a href="" class="login-btn scrollto">로그인 하러가기</a></li> -->
-              <!-- <li class="buy-tickets"><a href="/#buy-tickets">로그인하기</a></li> -->
-            <li class="login-btn"><a href="/#login-btn">로그인하기</a></li>
+            {% else %}
+            <li class="login-btn" style="margin-left: 20%"><a href="{% provider_login_url 'kakao' %}">로그인하기</a></li>
+            {% endif %}
             </li>
           </ul>
         </div>

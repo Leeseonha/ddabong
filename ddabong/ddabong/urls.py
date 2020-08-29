@@ -23,6 +23,7 @@ import voulunteer_work.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('', include('theme.urls')),
     path('v_area/',  voulunteer_work.views.v_area, name='v_area'),
     path('v_all/',  voulunteer_work.views.v_all, name='v_all'),
