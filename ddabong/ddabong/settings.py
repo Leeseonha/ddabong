@@ -25,23 +25,38 @@ SECRET_KEY = '24b*4w6qxk1xkgboekvi@!dbesmvy=h!exb(os#vw^0qcb(vzz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+   # 'ddabong.apps.Dabbong_dbConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'theme',
+    'django.contrib.sites',
+    'ddabong.theme',
     'ddabong',
-    'items',
-    'mypage',
-    'voulunteer_work',
+    'ddabong.items',
+    'ddabong.mypage',
+    'ddabong.voulunteer_work',
+
+    # django-rest-auth
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+    #allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
+
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -74,16 +89,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ddabong.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ddabong',
+        'USER' : 'jesh',
+        'PASSWORD':'jesh2728',
+        'HOST': 'ddabong.ckksgmnbr3dl.us-east-2.rds.amazonaws.com',
+        'PORT' : '3306',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -125,4 +155,23 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+SITE_ID = 5
+
+# rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ],
+}
+
 STATIC_URL = '/static/'
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
