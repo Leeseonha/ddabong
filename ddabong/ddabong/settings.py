@@ -100,13 +100,11 @@ AUTHENTICATION_BACKENDS = (
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ddabong_db',
-#         'USER' : 'root',
-#         'PASSWORD':'201814027',
-#         'HOST': 'localhost',
+#         'NAME': 'ddabong',
+#         'USER' : 'jesh',
+#         'PASSWORD':'jesh2728',
+#         'HOST': 'ddabong.ckksgmnbr3dl.us-east-2.rds.amazonaws.com',
 #         'PORT' : '3306',
-#         'OPTIONS' : {
-#             'read_default_file' : 'ddabong/my.cnf',
 #         }
 # }
 DATABASES = {
