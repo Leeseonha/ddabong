@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import contact.views
-import items.views
-import mypage.views
-import theme.views
-import voulunteer_work.views
-import account.views
+import ddabong.items.views
+import ddabong.mypage.views
+import ddabong.theme.views
+import ddabong.voulunteer_work.views
+import ddabong.account.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
