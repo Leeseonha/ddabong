@@ -1,5 +1,5 @@
-{% load staticfiles %}
-
+{% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,12 +10,17 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <!-- Favicons -->
   <link href="{% static 'img/favicon.png' %}" rel="icon">
   <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+    rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
   <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -36,52 +41,62 @@
   <!--==========================
     Header
   ============================-->
-  <header id="header" class="header-scrolled">
+  <header id="header" class="header-fixed">
     <div class="container">
-      
+
       <div class="row">
-          <div class="cow">
-            <div id="logo" class="pull-left">
-            <a href="#intro" class="scrollto"><img src="{% static 'img/logo.png' %}" alt="" title=""></a>
-            </div>
+        <div class="col">
+          <div id="logo" class="pull-left">
+            <a href="/#intro" class="scrollto"><img src="{% static 'img/logo.png' %}" alt="" title=""></a>
+          </div>
         </div>
 
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="/#intro">Home</a></li>
-          <li><a href="/#about">About</a></li>
-          <!-- <li><a href="/#speakers">봉사페이지</a></li> -->
-          <!-- <li><a href="/#schedule">Schedule</a></li> -->
-          <!-- <li><a href="#venue">Venue</a></li> -->
-          <li><a href="/#hotels">봉사페이지</a></li>
-          <li><a href="/#gallery">포인트교환처</a></li>
-          <li><a href="/#contact">봉사등록</a></li>
-          <li><a href="/#supporters">Sponsors</a></li>
-          <!-- <li class="buy-tickets"><a href="/#buy-tickets">로그인하기</a></li> -->
-        </ul>
-      </nav>
+        <div class="col-6" style="margin-left: 5%">
+          <!-- <nav id="nav-menu-container"> -->
+          <ul class="nav-menu">
+            <li class="menu-active"><a href="/#intro">메인</a></li>
+            <li><a href="/#about">소개</a></li>
+            <!-- <li><a href="/#speakers">봉사페이지</a></li> -->
+            <!-- <li><a href="/#schedule">Schedule</a></li> -->
+            <!-- <li><a href="#venue">Venue</a></li> -->
+            <li><a href="/#hotels">봉사페이지</a></li>
+            <li><a href="/#gallery">포인트교환처</a></li>
+            <li><a href="/#contact">봉사등록</a></li>
+            <li><a href="/#supporters">후원</a></li>
+            <!-- <li class="buy-tickets"><a href="/#buy-tickets">로그인하기</a></li> -->
+          </ul>
+          <!-- </nav> -->
+        </div>
 
-      <div class="col">
-        <!-- <nav id="nav-menu-container"> -->
+        <div class="col">
+          <!-- <nav id="nav-menu-container"> -->
           <ul class="nav-menu">
             <li class="nav-item dropdown" style="margin-left: 10%">
-                <img src="" class="rounded-circle" width="40px" height="40px" />
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">님이 로그인 중</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'mypage' %}"><p>내봉사내역</p></a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><p>내포인트내역</p></a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><p>로그아웃</p></a>
-                  </div>
-                <!-- <li class="contact" style="margin-left: 20%"><a href="" class="login-btn scrollto">로그인 하러가기</a></li> -->
-                <!-- <li class="buy-tickets"><a href="/#buy-tickets">로그인하기</a></li> -->
-                <li class="buy-tickets"><a href="/#login-btn">로그인하기</a></li>
+              {% if user.is_authenticated %}
+              <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" class="rounded-circle" width="40px" height="40px" />
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">{{user.username}} 님이 로그인 중</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'mypage' %}">
+                  <p>내봉사내역</p>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  <p>내포인트내역</p>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/accounts/logout">
+                  <p>로그아웃</p>
+                </a>
+              </div>
+            {% else %}
+            <li class="login-btn" style="margin-left: 20%"><a href="{% provider_login_url 'kakao' %}">로그인하기</a></li>
+            {% endif %}
             </li>
           </ul>
-      </div>
+        </div>
 
-    </div>
+      </div>
     </div>
   </header><!-- #header -->
 
@@ -96,49 +111,23 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-info">
-            <img src="{% static 'img/logo.png' %}" alt="TheEvenet">
-            <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
+            <h4></h4>
+            <div class="copyright">
+              &copy; Copyright <strong>따봉 sh & je</strong>
+            </div>
+            <div class="credits">
+              Developed by <a href="https://www.instagram.com/seon._.h_a/">이선하</a>,
+              <a href="#">신정은</a>
+              <br><br>
+            </div>
 
-            <div class="social-links">
-              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            <div class="social-links">&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://twitter.com/?lang=ko" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.instagram.com/?hl=ko" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="https://www.google.com/webhp?hl=ko&ictx=2&sa=X&ved=0ahUKEwjf2Z7Lp4LiAhW0IqYKHezjCFoQPQgH" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="https://www.youtube.com/" class="youtube"><i class="fa fa-youtube"></i></a>
             </div>
 
           </div>
@@ -147,20 +136,6 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong>TheEvent</strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=TheEvent
-        -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
   </footer><!-- #footer -->
 
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
