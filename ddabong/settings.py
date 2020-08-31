@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    #'ddabong.apps.Dabbong_dbConfig',
+   # 'ddabong.apps.Dabbong_dbConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'ddabong.theme',
+    'theme',
     'ddabong',
-    'ddabong.items',
-    'ddabong.mypage',
-    'ddabong.voulunteer_work',
+    'items',
+    'mypage',
+    'voulunteer_work',
 
     # django-rest-auth
     'rest_framework',
@@ -97,6 +97,7 @@ AUTHENTICATION_BACKENDS = (
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {

@@ -16,17 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import contact.views
-import ddabong.items.views
-import ddabong.mypage.views
-import ddabong.theme.views
-import ddabong.voulunteer_work.views
+import items.views
+import mypage.views
+import theme.views
+import voulunteer_work.views
+import account.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ddabong.theme.urls')),
-    path('v_area/',  ddabong.voulunteer_work.views.v_area, name='v_area'),
-    path('v_all/',  ddabong.voulunteer_work.views.v_all, name='v_all'),
-    path('v_detail/',  ddabong.voulunteer_work.views.v_detail, name='v_detail'),
-    path('mypage/',  ddabong.mypage.views.mypage, name='mypage'),
-    path('items/', ddabong.items.views.items, name='items'),
+    path('accounts/', include('allauth.urls')),
+    path('', include('theme.urls')),
+    path('v_area/',  voulunteer_work.views.v_area, name='v_area'),
+    path('v_all/',  voulunteer_work.views.v_all, name='v_all'),
+    path('mypage/',  mypage.views.mypage, name='mypage'),
+    path('items/', items.views.items, name='items'),
 ]
